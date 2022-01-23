@@ -2,6 +2,7 @@ package com.ystoik.spring.springboot.cinema.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "show_session")
@@ -11,32 +12,27 @@ public class ShowSession {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "movie_id", nullable = false)
-    private Long movie_id;
-
-    @Column(name = "hall_id", nullable = false)
-    private Long hall_id;
-
     @Column(name = "date", nullable = false)
     private Date date;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH})
+    @JoinColumn(name = "movie_id")
+    private Movie sessionMovie;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH})
+    @JoinColumn(name = "hall_id")
+    private Hall sessionHall;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "showSessionTicket", fetch = FetchType.EAGER)
+    private List<Ticket> tickets;
 
     public ShowSession() {
     }
 
-    public ShowSession(Long movie_id, Long hall_id, Date date) {
-        this.movie_id = movie_id;
-        this.hall_id = hall_id;
+    public ShowSession(Date date) {
         this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "Session{" +
-                "id=" + id +
-                ", movie_id=" + movie_id +
-                ", hall_id=" + hall_id +
-                ", date=" + date +
-                '}';
     }
 
     public Long getId() {
@@ -47,27 +43,35 @@ public class ShowSession {
         this.id = id;
     }
 
-    public Long getMovie_id() {
-        return movie_id;
-    }
-
-    public void setMovie_id(Long movie_id) {
-        this.movie_id = movie_id;
-    }
-
-    public Long getHall_id() {
-        return hall_id;
-    }
-
-    public void setHall_id(Long hall_id) {
-        this.hall_id = hall_id;
-    }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Hall getSessionHall() {
+        return sessionHall;
+    }
+
+    public void setSessionHall(Hall sessionHall) {
+        this.sessionHall = sessionHall;
+    }
+
+    public Movie getSessionMovie() {
+        return sessionMovie;
+    }
+
+    public void setSessionMovie(Movie sessionMovie) {
+        this.sessionMovie = sessionMovie;
+    }
+
+    @Override
+    public String toString() {
+        return "ShowSession{" +
+                "id=" + id +
+                ", date=" + date +
+                '}';
     }
 }

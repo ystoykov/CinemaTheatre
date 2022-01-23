@@ -1,6 +1,7 @@
 package com.ystoik.spring.springboot.cinema.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "hall")
@@ -15,33 +16,26 @@ public class Hall {
     private String name;
 
     @Column(name = "rows_num", nullable = false)
-    private short rows_num;
+    private short rowsNum;
 
     @Column(name = "seats_num", nullable = false)
-    private short seats_num;
+    private short seatsNum;
 
     @Column(name = "isOpen")
     private boolean isOpen;
 
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH}, mappedBy = "seatsHall", fetch = FetchType.EAGER)
+    private List<Seat> seats;
+
     public Hall() {
     }
 
-    public Hall(String name, short rows_num, short seats_num, boolean isOpen) {
+    public Hall(String name, short rowsNum, short seatsNum, boolean isOpen) {
         this.name = name;
-        this.rows_num = rows_num;
-        this.seats_num = seats_num;
+        this.rowsNum = rowsNum;
+        this.seatsNum = seatsNum;
         this.isOpen = isOpen;
-    }
-
-    @Override
-    public String toString() {
-        return "Hall{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", rows_num=" + rows_num +
-                ", seats_num=" + seats_num +
-                ", isOpen=" + isOpen +
-                '}';
     }
 
     public Long getId() {
@@ -60,20 +54,20 @@ public class Hall {
         this.name = name;
     }
 
-    public short getRows_num() {
-        return rows_num;
+    public short getRowsNum() {
+        return rowsNum;
     }
 
-    public void setRows_num(short rows_num) {
-        this.rows_num = rows_num;
+    public void setRowsNum(short rows_num) {
+        this.rowsNum = rows_num;
     }
 
-    public short getSeats_num() {
-        return seats_num;
+    public short getSeatsNum() {
+        return seatsNum;
     }
 
-    public void setSeats_num(short seats_num) {
-        this.seats_num = seats_num;
+    public void setSeatsNum(short seats_num) {
+        this.seatsNum = seats_num;
     }
 
     public boolean isOpen() {
@@ -82,5 +76,24 @@ public class Hall {
 
     public void setOpen(boolean open) {
         isOpen = open;
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+    }
+
+    @Override
+    public String toString() {
+        return "Hall{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rowsNum=" + rowsNum +
+                ", seatsNum=" + seatsNum +
+                ", isOpen=" + isOpen +
+                '}';
     }
 }

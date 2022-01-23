@@ -2,6 +2,7 @@ package com.ystoik.spring.springboot.cinema.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "movie")
@@ -16,34 +17,38 @@ public class Movie {
     private String name;
 
     @Column(name = "release_year", nullable = false)
-    private short release_year;
+    private short releaseYear;
 
     @Column(name = "duration", nullable = false)
     private Date duration;
 
     @Column(name = "premiere_date", nullable = false)
-    private Date premiere_date;
+    private Date premiereDate;
 
     @Column(name = "final_date", nullable = false)
-    private Date final_date;
+    private Date finalDate;
 
     @Column(name = "description", nullable = false, length = 2048)
     private String description;
 
     @Column(name = "poster_addr", nullable = false, length = 1024)
-    private String poster_addr;
+    private String posterAddr;
+
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+        CascadeType.REFRESH}, mappedBy = "sessionMovie", fetch = FetchType.EAGER)
+    private List<ShowSession> showSessions;
 
     public Movie() {
     }
 
-    public Movie(String name, short release_year, Date duration, Date premiere_date, Date final_date, String description, String poster_addr) {
+    public Movie(String name, short releaseYear, Date duration, Date premiereDate, Date finalDate, String description, String posterAddr) {
         this.name = name;
-        this.release_year = release_year;
+        this.releaseYear = releaseYear;
         this.duration = duration;
-        this.premiere_date = premiere_date;
-        this.final_date = final_date;
+        this.premiereDate = premiereDate;
+        this.finalDate = finalDate;
         this.description = description;
-        this.poster_addr = poster_addr;
+        this.posterAddr = posterAddr;
     }
 
     @Override
@@ -51,12 +56,12 @@ public class Movie {
         return "Movie{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", release_year=" + release_year +
+                ", release_year=" + releaseYear +
                 ", duration=" + duration +
-                ", premiere_date=" + premiere_date +
-                ", final_date=" + final_date +
+                ", premiere_date=" + premiereDate +
+                ", final_date=" + finalDate +
                 ", description='" + description + '\'' +
-                ", poster_addr='" + poster_addr + '\'' +
+                ", poster_addr='" + posterAddr + '\'' +
                 '}';
     }
 
@@ -76,12 +81,12 @@ public class Movie {
         this.name = name;
     }
 
-    public short getRelease_year() {
-        return release_year;
+    public short getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setRelease_year(short release_year) {
-        this.release_year = release_year;
+    public void setReleaseYear(short release_year) {
+        this.releaseYear = release_year;
     }
 
     public Date getDuration() {
@@ -92,20 +97,20 @@ public class Movie {
         this.duration = duration;
     }
 
-    public Date getPremiere_date() {
-        return premiere_date;
+    public Date getPremiereDate() {
+        return premiereDate;
     }
 
-    public void setPremiere_date(Date premiere_date) {
-        this.premiere_date = premiere_date;
+    public void setPremiereDate(Date premiere_date) {
+        this.premiereDate = premiere_date;
     }
 
-    public Date getFinal_date() {
-        return final_date;
+    public Date getFinalDate() {
+        return finalDate;
     }
 
-    public void setFinal_date(Date final_date) {
-        this.final_date = final_date;
+    public void setFinalDate(Date final_date) {
+        this.finalDate = final_date;
     }
 
     public String getDescription() {
@@ -116,11 +121,19 @@ public class Movie {
         this.description = description;
     }
 
-    public String getPoster_addr() {
-        return poster_addr;
+    public String getPosterAddr() {
+        return posterAddr;
     }
 
-    public void setPoster_addr(String poster_addr) {
-        this.poster_addr = poster_addr;
+    public void setPosterAddr(String poster_addr) {
+        this.posterAddr = poster_addr;
+    }
+
+    public List<ShowSession> getShowSessions() {
+        return showSessions;
+    }
+
+    public void setShowSessions(List<ShowSession> showSessions) {
+        this.showSessions = showSessions;
     }
 }

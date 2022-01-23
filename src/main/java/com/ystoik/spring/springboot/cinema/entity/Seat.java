@@ -11,41 +11,31 @@ public class Seat {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "hall_id", nullable = false)
-    private long hall_id;
-
     @Column(name = "row_number", nullable = false)
-    private short row_number;
+    private short rowNumber;
 
     @Column(name = "seat_number", nullable = false)
-    private short seat_number;
+    private short seatNumber;
 
     @Column(name = "default_price", nullable = false)
-    private float default_price;
+    private float defaultPrice;
 
     @Column(name = "isLux", nullable = false)
     private boolean isLux;
 
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH})
+    @JoinColumn(name = "hall_id")
+    private Hall seatsHall;
+
     public Seat() {
     }
 
-    public Seat(long hall_id, short row_number, short seat_number, float default_price, boolean isLux) {
-        this.hall_id = hall_id;
-        this.row_number = row_number;
-        this.seat_number = seat_number;
-        this.default_price = default_price;
+    public Seat(short rowNumber, short seatNumber, float defaultPrice, boolean isLux) {
+        this.rowNumber = rowNumber;
+        this.seatNumber = seatNumber;
+        this.defaultPrice = defaultPrice;
         this.isLux = isLux;
-    }
-
-    @Override
-    public String toString() {
-        return "Seat{" +
-                "id=" + id +
-                ", hall_id=" + hall_id +
-                ", row_number=" + row_number +
-                ", seat_number=" + seat_number +
-                ", default_price=" + default_price +
-                '}';
     }
 
     public Long getId() {
@@ -56,36 +46,28 @@ public class Seat {
         this.id = id;
     }
 
-    public long getHall_id() {
-        return hall_id;
+    public short getRowNumber() {
+        return rowNumber;
     }
 
-    public void setHall_id(long hall_id) {
-        this.hall_id = hall_id;
+    public void setRowNumber(short row_number) {
+        this.rowNumber = row_number;
     }
 
-    public short getRow_number() {
-        return row_number;
+    public short getSeatNumber() {
+        return seatNumber;
     }
 
-    public void setRow_number(short row_number) {
-        this.row_number = row_number;
+    public void setSeatNumber(short seat_number) {
+        this.seatNumber = seat_number;
     }
 
-    public short getSeat_number() {
-        return seat_number;
+    public float getDefaultPrice() {
+        return defaultPrice;
     }
 
-    public void setSeat_number(short seat_number) {
-        this.seat_number = seat_number;
-    }
-
-    public float getDefault_price() {
-        return default_price;
-    }
-
-    public void setDefault_price(float default_price) {
-        this.default_price = default_price;
+    public void setDefaultPrice(float default_price) {
+        this.defaultPrice = default_price;
     }
 
     public boolean isLux() {
@@ -94,5 +76,24 @@ public class Seat {
 
     public void setLux(boolean lux) {
         isLux = lux;
+    }
+
+    public Hall getSeatsHall() {
+        return seatsHall;
+    }
+
+    public void setSeatsHall(Hall seatsHall) {
+        this.seatsHall = seatsHall;
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "id=" + id +
+                ", rowNumber=" + rowNumber +
+                ", seatNumber=" + seatNumber +
+                ", defaultPrice=" + defaultPrice +
+                ", isLux=" + isLux +
+                '}';
     }
 }
