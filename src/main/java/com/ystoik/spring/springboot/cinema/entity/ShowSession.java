@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "sessions")
-public class Session {
+@Table(name = "show_session")
+public class ShowSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -20,10 +20,10 @@ public class Session {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    public Session() {
+    public ShowSession() {
     }
 
-    public Session(Long movie_id, Long hall_id, Date date) {
+    public ShowSession(Long movie_id, Long hall_id, Date date) {
         this.movie_id = movie_id;
         this.hall_id = hall_id;
         this.date = date;

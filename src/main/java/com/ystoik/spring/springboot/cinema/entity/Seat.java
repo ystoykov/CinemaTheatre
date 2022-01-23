@@ -23,14 +23,18 @@ public class Seat {
     @Column(name = "default_price", nullable = false)
     private float default_price;
 
+    @Column(name = "isLux", nullable = false)
+    private boolean isLux;
+
     public Seat() {
     }
 
-    public Seat(long hall_id, short row_number, short seat_number, float default_price) {
+    public Seat(long hall_id, short row_number, short seat_number, float default_price, boolean isLux) {
         this.hall_id = hall_id;
         this.row_number = row_number;
         this.seat_number = seat_number;
         this.default_price = default_price;
+        this.isLux = isLux;
     }
 
     @Override
@@ -82,5 +86,13 @@ public class Seat {
 
     public void setDefault_price(float default_price) {
         this.default_price = default_price;
+    }
+
+    public boolean isLux() {
+        return isLux;
+    }
+
+    public void setLux(boolean lux) {
+        isLux = lux;
     }
 }

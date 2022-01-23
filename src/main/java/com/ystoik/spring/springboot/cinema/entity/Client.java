@@ -3,7 +3,7 @@ package com.ystoik.spring.springboot.cinema.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "client")
 public class Client {
 
     @Id
@@ -23,29 +23,24 @@ public class Client {
     @Column(name = "discount")
     private float discount;
 
-    @Column(name = "isAdmin")
-    private boolean isAdmin;
-
     public Client() {
     }
 
-    public Client(String first_name, String surname, String male, float discount, boolean isAdmin) {
+    public Client(String first_name, String surname, String male, float discount) {
         this.first_name = first_name;
         this.surname = surname;
         this.male = male;
         this.discount = discount;
-        this.isAdmin = isAdmin;
     }
 
     @Override
     public String toString() {
-        return "Clients{" +
+        return "Client{" +
                 "id=" + id +
                 ", first_name='" + first_name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", male='" + male + '\'' +
                 ", discount=" + discount +
-                ", isAdmin=" + isAdmin +
                 '}';
     }
 
@@ -87,13 +82,5 @@ public class Client {
 
     public void setDiscount(float discount) {
         this.discount = discount;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
     }
 }

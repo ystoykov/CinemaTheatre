@@ -3,7 +3,7 @@ package com.ystoik.spring.springboot.cinema.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "halls")
+@Table(name = "hall")
 public class Hall {
 
     @Id
@@ -14,17 +14,11 @@ public class Hall {
     @Column(name = "name", nullable = false, length = 64)
     private String name;
 
-    @Column(name = "standart_row", nullable = false)
-    private short standart_row;
+    @Column(name = "rows_num", nullable = false)
+    private short rows_num;
 
-    @Column(name = "standart_seats", nullable = false)
-    private short standart_seats;
-
-    @Column(name = "lux_row", nullable = false)
-    private short lux_row;
-
-    @Column(name = "lux_seats", nullable = false)
-    private short lux_seats;
+    @Column(name = "seats_num", nullable = false)
+    private short seats_num;
 
     @Column(name = "isOpen")
     private boolean isOpen;
@@ -32,12 +26,10 @@ public class Hall {
     public Hall() {
     }
 
-    public Hall(String name, short standart_row, short standart_seats, short lux_row, short lux_seats, boolean isOpen) {
+    public Hall(String name, short rows_num, short seats_num, boolean isOpen) {
         this.name = name;
-        this.standart_row = standart_row;
-        this.standart_seats = standart_seats;
-        this.lux_row = lux_row;
-        this.lux_seats = lux_seats;
+        this.rows_num = rows_num;
+        this.seats_num = seats_num;
         this.isOpen = isOpen;
     }
 
@@ -46,10 +38,8 @@ public class Hall {
         return "Hall{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", standart_row=" + standart_row +
-                ", standart_seats=" + standart_seats +
-                ", lux_row=" + lux_row +
-                ", lux_seats=" + lux_seats +
+                ", rows_num=" + rows_num +
+                ", seats_num=" + seats_num +
                 ", isOpen=" + isOpen +
                 '}';
     }
@@ -70,36 +60,20 @@ public class Hall {
         this.name = name;
     }
 
-    public short getStandart_row() {
-        return standart_row;
+    public short getRows_num() {
+        return rows_num;
     }
 
-    public void setStandart_row(short standart_row) {
-        this.standart_row = standart_row;
+    public void setRows_num(short rows_num) {
+        this.rows_num = rows_num;
     }
 
-    public short getStandart_seats() {
-        return standart_seats;
+    public short getSeats_num() {
+        return seats_num;
     }
 
-    public void setStandart_seats(short standart_seats) {
-        this.standart_seats = standart_seats;
-    }
-
-    public short getLux_row() {
-        return lux_row;
-    }
-
-    public void setLux_row(short lux_row) {
-        this.lux_row = lux_row;
-    }
-
-    public short getLux_seats() {
-        return lux_seats;
-    }
-
-    public void setLux_seats(short lux_seats) {
-        this.lux_seats = lux_seats;
+    public void setSeats_num(short seats_num) {
+        this.seats_num = seats_num;
     }
 
     public boolean isOpen() {
